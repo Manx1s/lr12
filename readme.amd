@@ -1,0 +1,10 @@
+lab 12
+git status
+git add .
+git status
+git commit -m "..."
+git log
+git push
+
+git status
+git pull origin master
