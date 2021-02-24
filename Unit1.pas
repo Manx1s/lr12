@@ -90,9 +90,11 @@ end;
 procedure TForm1.Button3Click(Sender: TObject);
 var i:integer;
 begin
-for i := 1 to 5 do
+for i := 1 to Memo1.Lines.Count do
+begin
 Memo1.Lines.Add('Адрес объекта с номером '+IntToStr(i) +' равен '+IntToStr( integer(Par[i]))+' Поле Fa = '+ inttostr(Par[i].Fa));
-
+Par[i].Show;
+end;
 end;
 
 end.
