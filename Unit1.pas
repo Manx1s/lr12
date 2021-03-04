@@ -136,9 +136,9 @@ end;
 
 
 procedure TForm1.Button4Click(Sender: TObject);
-var i:integer;
 begin
   Bar1:=TBar.Create(1,2,3,10.5);
-  Bar1.Show;
+  TParallel(Bar1).Show;
 end;
+
 end.
