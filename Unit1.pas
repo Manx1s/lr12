@@ -29,7 +29,8 @@ TParallel=class;
     Fa:word;
     Fb:word;
     Fc:word;
-    procedure init(a,b,c:word);
+    {procedure init(a,b,c:word); }
+    constructor Create(a,b,c:word);
     function Volume:word;
     procedure Show;
   end;
@@ -45,12 +46,12 @@ var
 
 { TParallel }
 
-procedure TParallel.init(a, b, c: word);
+{procedure TParallel.init(a, b, c: word);
 begin
   Fa:=a;
   Fb:=b;
   Fc:=c;
-end;
+end;}
 
 procedure TParallel.Show;
 begin
@@ -69,11 +70,12 @@ end;
 procedure TForm1.Button1Click(Sender: TObject);
 begin
   x:=x+1; y:=y+1; z:=z+1;
-  Par1:=TParallel.Create;
+  Par1:=TParallel.Create(x,y,z);
   Par[x]:=Par1;
-  Par1.init(x,y,z);
+ { Par1.init(x,y,z);}
   Par1.Show;
-  Memo1.Lines.Add('Адрес в памяти объекта, содержащийся в Par1, равен ' +IntToStr(integer(Par1)) );
+  Memo1.Lines.Add('Адрес в памяти объекта, содержащийся в Par1, равен '
+  +IntToStr(integer(Par1)) );
 end;
 
 
@@ -92,9 +94,17 @@ var i:integer;
 begin
 for i := 1 to Memo1.Lines.Count do
 begin
-Memo1.Lines.Add('Адрес объекта с номером '+IntToStr(i) +' равен '+IntToStr( integer(Par[i]))+' Поле Fa = '+ inttostr(Par[i].Fa));
+Memo1.Lines.Add('Адрес объекта с номером '+IntToStr(i) +' равен '
++IntToStr( integer(Par[i]))+' Поле Fa = '+ inttostr(Par[i].Fa));
 Par[i].Show;
 end;
+end;
+
+constructor TParallel.Create(a,b,c:word);
+begin
+  Fa:=a;
+  Fb:=b;
+  Fc:=c;
 end;
 
 end.
