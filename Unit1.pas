@@ -23,7 +23,7 @@ type
     Fc: word;
     constructor Create(a,b,c:word);
  //   procedure init(a, b, c: word);
-    function Volume: word;
+    function Volume: word; virtual;
     procedure Show;
   end;
   TBar=class(TParallel)
@@ -31,6 +31,7 @@ type
     FRo:real;
     constructor Create(a,b,c:word; Ro:real);
     function massa:real;
+    function volume:word;  override;
   //  procedure Show;
   end;
   TForm1 = class(TForm)
@@ -130,10 +131,11 @@ end;
 
 procedure TForm1.Button4Click(Sender: TObject);
 begin
+   Par1:=TParallel.Create(1,2,3);
+  Par1.Show;
   Bar1:=TBar.Create(1,2,3,10.5);
-  //Bar1.Show;
-  TParallel(Bar1).Show;
-end;
+  Bar1.Show;
+  end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
@@ -152,6 +154,11 @@ end;
 function TBar.massa: real;
 begin
   result:=FRo*Volume;
+end;
+
+function TBar.volume: word;
+begin
+   result:=Fa*Fb*Fc*100;
 end;
 
 {procedure TBar.Show;
