@@ -31,7 +31,7 @@ type
     FRo:real;
     constructor Create(a,b,c:word; Ro:real);
     function massa:real;
-    procedure Show;
+  //  procedure Show;
   end;
   TForm1 = class(TForm)
     Button1: TButton;
@@ -131,7 +131,8 @@ end;
 procedure TForm1.Button4Click(Sender: TObject);
 begin
   Bar1:=TBar.Create(1,2,3,10.5);
-  Bar1.Show;
+  //Bar1.Show;
+  TParallel(Bar1).Show;
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -153,7 +154,7 @@ begin
   result:=FRo*Volume;
 end;
 
-procedure TBar.Show;
+{procedure TBar.Show;
 begin
 ShowMessage('Объем параллелепипеда равен ' + IntToStr(Volume)+#10#13+
 'Ширина – Поле Fa= '+IntToStr(Fa)+#10#13+
@@ -162,7 +163,7 @@ ShowMessage('Объем параллелепипеда равен ' + IntToStr(Volume)+#10#13+
 'Плотность – Поле FRo= '+FloatToStr(FRo)+#10#13+
 'Масса = '+FloatToStr(massa));
 end;
-
+}
 begin
   Transport:=TTransport.Create;
   Automobile:=TAutomobile.Create;
