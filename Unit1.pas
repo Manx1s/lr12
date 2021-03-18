@@ -34,6 +34,9 @@ type
     function volume:word;  override;
   //  procedure Show;
   end;
+  TBarSon = class(TBar)
+     function Volume:word; override;
+   end;
   TForm1 = class(TForm)
     Button1: TButton;
     Button2: TButton;
@@ -61,6 +64,7 @@ var
   Transport: TTransport;
   Automobile: TAutomobile;
   Toyota: TToyota;
+  BarSon1: TBarSon;
   x: word = 0;
   y: word = 0;
   z: word = 0;
@@ -131,10 +135,12 @@ end;
 
 procedure TForm1.Button4Click(Sender: TObject);
 begin
-   Par1:=TParallel.Create(1,2,3);
+  Par1:=TParallel.Create(1,2,3);
   Par1.Show;
   Bar1:=TBar.Create(1,2,3,10.5);
   Bar1.Show;
+  BarSon1:=TBarson.Create(1,2,3,10.5);
+  BarSon1.Show;
   end;
 
 procedure TForm1.FormCreate(Sender: TObject);
@@ -171,6 +177,13 @@ ShowMessage('Объем параллелепипеда равен ' + IntToStr(Volume)+#10#13+
 'Масса = '+FloatToStr(massa));
 end;
 }
+{ TBarSon }
+
+function TBarSon.Volume: word;
+begin
+result:=Fa*Fb*Fc*1000;
+end;
+
 begin
   Transport:=TTransport.Create;
   Automobile:=TAutomobile.Create;
