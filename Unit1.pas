@@ -24,7 +24,7 @@ type
     constructor Create(a,b,c:word);
  //   procedure init(a, b, c: word);
     function Volume: word; virtual;
-    procedure Show;
+    procedure Show;  virtual;
   end;
   TBar=class(TParallel)
     public
@@ -32,10 +32,11 @@ type
     constructor Create(a,b,c:word; Ro:real);
     function massa:real;
     function volume:word;  override;
-  //  procedure Show;
+    procedure Show; override;
   end;
   TBarSon = class(TBar)
      function Volume:word; override;
+     procedure Show; override;
    end;
   TForm1 = class(TForm)
     Button1: TButton;
@@ -43,11 +44,13 @@ type
     Memo1: TMemo;
     Button3: TButton;
     Button4: TButton;
+    Button5: TButton;
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
     procedure Button3Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure Button4Click(Sender: TObject);
+    procedure Button5Click(Sender: TObject);
 
   private
     { Private declarations }
@@ -88,11 +91,12 @@ Fb:=b;
 Fc:=c;
 end;
 
-procedure TParallel.Show;
+procedure TParallel.Show();
 begin
-  ShowMessage('Объем параллелепипеда равен ' + inttostr(Volume) + #10#13 +
-    'Ширина - Поле Fa =' + inttostr(Fa) + #10#13 + 'Длина - Поле Fb =' +
-    inttostr(Fb) + #10#13 + 'Высота - Поле Fc =' + inttostr(Fc));
+  ShowMessage('Объем параллелепипеда равен ' + inttostr(Volume) + #10#13+
+  'Ширина - Поле Fa =' +inttostr(Fa) + #10#13 +
+  'Длина - Поле Fb =' +inttostr(Fb) + #10#13 +
+  'Высота - Поле Fc =' + inttostr(Fc));
 end;
 
 function TParallel.Volume: word;
@@ -135,21 +139,22 @@ end;
 
 procedure TForm1.Button4Click(Sender: TObject);
 begin
-  {Par1:=TParallel.Create(1,2,3);
-  Bar1:=TBar.Create(1,2,3,10.5);
-  //Bar1.Show;
-  BarSon1:=TBarson.Create(1,2,3,10.5);
-  //BarSon1.Show;
-  Par1:=Bar1;
-  ShowMessage('Плотность - поле FRo='+floattostr((Par1 as TBar).FRo)+#10#13+'Масса ='+floattostr((Par1 as TBar).massa));
-  Par1.Show;
-  }
   Par1:=TBar.Create(1,2,3,10.5);
   ShowMessage('Плотность - поле FRo='+floattostr((Par1 as TBar).FRo)+#10#13+'Масса ='+floattostr((Par1 as TBar).massa));
   Par1.Show;
   Par1:=TBarSon.Create(1,2,3,10.5);
   Par1.Show;
   end;
+
+procedure TForm1.Button5Click(Sender: TObject);
+begin
+  Par1:=TParallel.Create(1,2,3);
+  Par1.Show;
+  Par1.Free;
+  Par1:=TBar.Create(1,2,3,100);
+  Par1.Show;
+  Par1.Free;
+end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 begin
@@ -175,7 +180,7 @@ begin
    result:=Fa*Fb*Fc*100;
 end;
 
-{procedure TBar.Show;
+procedure TBar.Show;
 begin
 ShowMessage('Объем параллелепипеда равен ' + IntToStr(Volume)+#10#13+
 'Ширина – Поле Fa= '+IntToStr(Fa)+#10#13+
@@ -184,8 +189,20 @@ ShowMessage('Объем параллелепипеда равен ' + IntToStr(Volume)+#10#13+
 'Плотность – Поле FRo= '+FloatToStr(FRo)+#10#13+
 'Масса = '+FloatToStr(massa));
 end;
-}
+
 { TBarSon }
+
+procedure TBarSon.Show;
+begin
+  inherited;
+ShowMessage('Show-override. TBarSon'+#10#13+
+'Объем параллелепипеда равен ' + IntToStr(Volume)+#10#13+
+'Ширина – Поле Fa= '+IntToStr(Fa)+#10#13+
+'Длина – Поле Fb= '+IntToStr(Fb) +#10#13+
+'Высота – Поле Fc= '+IntToStr(Fc)+#10#13+
+'Плотность – Поле FRo= '+FloatToStr(FRo)+#10#13+
+'Масса = '+FloatToStr(massa));
+end;
 
 function TBarSon.Volume: word;
 begin
